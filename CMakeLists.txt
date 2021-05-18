@@ -4,10 +4,10 @@
 
 cmake_minimum_required(VERSION 3.7.2)
 cmake_policy(SET CMP0042 NEW)
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
 
 ###
@@ -19,11 +19,11 @@ set(PROJECT_DESCRIPTION "Open source version of the STMicroelectronics ST-LINK T
 include(GNUInstallDirs) # Define GNU standard installation directories
 
 ## Determine project version
-include(${CMAKE_MODULE_PATH}/get_version.cmake)
+include(get_version)
 
 ## Set C build flags
 if (NOT MSVC)
-    include(${CMAKE_MODULE_PATH}/c_flags.cmake)
+    include(c_flags)
 else ()
     message(STATUS "MSVC C Flags override to /MT")
     set(CMAKE_C_FLAGS_DEBUG_INIT          "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1")
